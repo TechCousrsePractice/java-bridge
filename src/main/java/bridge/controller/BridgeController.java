@@ -22,8 +22,16 @@ public class BridgeController {
 
     public void run() {
         Bridge bridge = requestBridgeLength();
-        gamePlay(bridge);
-        requestRetry();
+        bridge.getBridge().forEach(System.out::println);
+        boolean isRetry = true;
+        while (isRetry) {
+            gamePlay(bridge);
+            if (!gameManager.isFail()) {
+                break;
+            }
+            isRetry = requestRetry();
+        }
+        outputView.printResult(gameManager);
     }
 
     private Bridge requestBridgeLength() {
@@ -38,6 +46,7 @@ public class BridgeController {
     }
 
     private void gamePlay(Bridge bridge) {
+        gameManager.retry();
         for (int i = 0; i < bridge.getLength(); i++) {
             String moving = requestMoving();
             gameManager.move(bridge, moving, i);
@@ -48,7 +57,10 @@ public class BridgeController {
         }
     }
 
-    private String requestRetry() {
-        return InputHandler.handle(inputView::readGameCommand);
+    private boolean requestRetry() {
+        return InputHandler.handle(() -> {
+            String retry = inputView.readGameCommand();
+            return retry.equals("R");
+        });
     }
 }

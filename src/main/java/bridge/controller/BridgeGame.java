@@ -10,6 +10,7 @@ import java.util.List;
 public class BridgeGame {
     private List<String> upperBridge = new ArrayList<>();
     private List<String> lowerBridge = new ArrayList<>();
+    private int tryCount = 0;
 
     /**
      * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -45,6 +46,7 @@ public class BridgeGame {
      */
     public void retry() {
         initialize();
+        tryCount++;
     }
 
     /**
@@ -70,5 +72,9 @@ public class BridgeGame {
 
     public List<String> getLowerBridge() {
         return List.copyOf(lowerBridge);
+    }
+
+    public int getTryCount() {
+        return tryCount;
     }
 }
