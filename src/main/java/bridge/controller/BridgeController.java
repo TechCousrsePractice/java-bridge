@@ -1,6 +1,9 @@
 package bridge.controller;
 
+import bridge.BridgeRandomNumberGenerator;
 import bridge.domain.Bridge;
+import bridge.mapper.BridgeMapper;
+import bridge.util.BridgeMaker;
 import bridge.view.InputView;
 import bridge.view.OutputView;
 
@@ -26,8 +29,9 @@ public class BridgeController {
 
     private Bridge requestBridgeLength() {
         return InputHandler.handle(() -> {
+            BridgeMaker bridgeMaker = new BridgeMaker(new BridgeRandomNumberGenerator());
             int length = inputView.readBridgeSize();
-            return Bridge.create(length);
+            return BridgeMapper.createBridge(bridgeMaker.makeBridge(length));
         });
     }
 
