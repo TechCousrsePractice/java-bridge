@@ -2,6 +2,7 @@ package bridge.util;
 
 import bridge.exception.EmptyException;
 import bridge.exception.InvalidMovingInputException;
+import bridge.exception.InvalidRetryInputException;
 
 public class InputValidator {
     /**
@@ -13,6 +14,13 @@ public class InputValidator {
         }
         if (input.isBlank()) {
             throw EmptyException.of();
+        }
+        return input;
+    }
+
+    public static String validateRetry(String input) {
+        if (!input.equals("R") && !input.equals("Q")) {
+            throw InvalidRetryInputException.of();
         }
         return input;
     }

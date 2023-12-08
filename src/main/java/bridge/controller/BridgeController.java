@@ -23,6 +23,7 @@ public class BridgeController {
     public void run() {
         Bridge bridge = requestBridgeLength();
         gamePlay(bridge);
+        requestRetry();
     }
 
     private Bridge requestBridgeLength() {
@@ -45,5 +46,9 @@ public class BridgeController {
                 break;
             }
         }
+    }
+
+    private String requestRetry() {
+        return InputHandler.handle(inputView::readGameCommand);
     }
 }
