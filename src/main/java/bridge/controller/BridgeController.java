@@ -22,7 +22,6 @@ public class BridgeController {
 
     public void run() {
         Bridge bridge = requestBridgeLength();
-        bridge.getBridge().forEach(System.out::println);
         boolean isRetry = true;
         while (isRetry) {
             gamePlay(bridge);
