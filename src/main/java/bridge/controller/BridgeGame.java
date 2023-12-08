@@ -57,15 +57,6 @@ public class BridgeGame {
         lowerBridge.clear();
     }
 
-    /**
-     * 사용자가 한 스텝 밟을 때마다 비교해서 출력할 다리 생성하는 기능 private static Bridge compareWithUserBridge(List<String> bridge) {
-     * List<Boolean> upper = new ArrayList<>(); List<Boolean> lower = new ArrayList<>();
-     * <p>
-     * bridge.forEach(cross -> { boolean isUpper = isUpper(cross); upper.add(isUpper); lower.add(!isUpper); });
-     * <p>
-     * return Bridge.create(bridge.size(), upper, lower); }
-     */
-
     public List<String> getUpperBridge() {
         return List.copyOf(upperBridge);
     }
