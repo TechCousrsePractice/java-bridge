@@ -21,6 +21,7 @@ public class BridgeController {
 
     public void run() {
         Bridge bridge = requestBridgeLength();
+        String moving = requestMoving();
     }
 
     private Bridge requestBridgeLength() {
@@ -28,5 +29,9 @@ public class BridgeController {
             int length = inputView.readBridgeSize();
             return Bridge.create(length);
         });
+    }
+
+    private String requestMoving() {
+        return InputHandler.handle(inputView::readMoving);
     }
 }

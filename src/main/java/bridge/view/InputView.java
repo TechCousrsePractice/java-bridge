@@ -1,5 +1,6 @@
 package bridge.view;
 
+import bridge.util.InputValidator;
 import bridge.util.Parser;
 import camp.nextstep.edu.missionutils.Console;
 
@@ -20,7 +21,8 @@ public class InputView {
      * 사용자가 이동할 칸을 입력받는다.
      */
     public String readMoving() {
-        return null;
+        System.out.println(System.lineSeparator() + "이동할 칸을 선택해주세요. (위: U, 아래: D)");
+        return InputValidator.validateMoving(Console.readLine());
     }
 
     /**
