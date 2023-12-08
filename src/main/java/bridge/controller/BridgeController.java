@@ -1,9 +1,7 @@
 package bridge.controller;
 
-import bridge.BridgeRandomNumberGenerator;
 import bridge.domain.Bridge;
 import bridge.mapper.BridgeMapper;
-import bridge.util.BridgeMaker;
 import bridge.view.InputView;
 import bridge.view.OutputView;
 
@@ -24,18 +22,28 @@ public class BridgeController {
 
     public void run() {
         Bridge bridge = requestBridgeLength();
-        String moving = requestMoving();
+        gamePlay(bridge);
     }
 
     private Bridge requestBridgeLength() {
         return InputHandler.handle(() -> {
-            BridgeMaker bridgeMaker = new BridgeMaker(new BridgeRandomNumberGenerator());
             int length = inputView.readBridgeSize();
-            return BridgeMapper.createBridge(bridgeMaker.makeBridge(length));
+            return BridgeMapper.createBridge(length);
         });
     }
 
     private String requestMoving() {
         return InputHandler.handle(inputView::readMoving);
+    }
+
+    private void gamePlay(Bridge bridge) {
+        for (int i = 0; i < bridge.getLength(); i++) {
+            String moving = requestMoving();
+            gameManager.move(bridge, moving, i);
+            outputView.printMap(gameManager);
+            if (gameManager.isFail()) {
+                break;
+            }
+        }
     }
 }
